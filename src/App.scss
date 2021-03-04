@@ -1,0 +1,100 @@
+:root {
+  --nav-bg: #7ab317;
+  --gray-light: #F8F8F8;
+  --raiud: 20px
+}
+.App {
+  text-align: center;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.App-link {
+  color: #61dafb;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.navbar {
+  background-color: var(--nav-bg);
+}
+.main-content {
+  max-width: 1344px;
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+}
+.container-fluid {
+  margin:auto;
+  padding: 1rem;
+}
+.title {
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+}
+/* Loader */
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -500px 0
+  }
+  100% {
+    background-position: 500px 0
+  }
+}
+.placeholder-loader {
+  color: transparent !important;
+  user-select: none;
+  position: relative;
+  border-radius: calc(var(--radius) * 2);
+  &::after {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: block;
+    animation-duration: 1.75s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background-size: 1000px 100%;
+    background: linear-gradient(to right, #F8F8F8 8%, darken(#F8F8F8, 5%) 18%, #F8F8F8 33%) 5px 5px;
+    border-radius: 10px;
+    content: ' '
+  }
+}
+/* End Loader*/
+.placeholder-loader .big {
+  width: 200px;
+  height: 200px;
+}
+.placeholder-loader-bg {
+  background-color: var(--gray-light);
+  color: transparent !important;
+}
+.placeholder-loader-empty {
+  color: transparent !important;
+}
