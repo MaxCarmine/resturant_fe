@@ -3,7 +3,10 @@ import Card from "../common/cards/card";
 import Alert from "../common/cards/alert";
 import CardLoadingSection from "../common/cards/cardLoadingSection"
 import {fetchCategories} from "../functions/api"
-import {Row,Col, CardDeck, CardColumns} from "react-bootstrap"
+import {Row,Col,CardDeck} from "react-bootstrap"
+import {withRouter} from "react-router-dom"
+import { addCounter, decCounter,setCounter } from "../redux/actions";
+import { connect } from "react-redux";
 
 class Categories extends React.Component{
     constructor(props){
@@ -19,7 +22,7 @@ class Categories extends React.Component{
 
     fetchData(){
         //settare lo state
-        this.setState({loading: true})
+        this.setState({loading: true, error:false})
         fetchCategories()
         .then(categories=>{
             this.setState({
@@ -48,28 +51,40 @@ class Categories extends React.Component{
     render(){
         return(
             <div>
+                <p>il counter:{this.props.counter}</p>
+                <button onClick={()=>this.props.addCounter()}>Increment</button>
+                <button onClick={()=>this.props.decrementCounter()}>Decrement</button>
                 {
                     this.state.loading ?(
                         <CardLoadingSection/>
                     )
                     :this.state.error ?(
-                       <Alert/>
+                       <Alert
+                        retryCallBack={()=>this.fetchData()}
+                       />
                     )
                     :this.state.data ?(
-                        this.state.data.map((current,idx)=>{
-                            return(
-                                    <Row  md={4}  key={`card_loading_${idx}`}>
-                                        <Card
+                        <CardDeck className=".cards">
+                            <Row>{
+                            this.state.data.map((current,idx)=>{
+                                return(
+                                    <Col lg={3} key={`${idx}`}>
+                                        <Card 
+                                        callback={()=>this.props.history.push(`/categories/${current.id}`)}
+                                        urlImages={current.images[0].uri}
                                         title={current.title}
                                         subTitle={current.subtitle}
                                         description={current.description}
+                                        button={current.button}
                                         key={`${idx}_cardIndex`}
                                         /> 
-                                    </Row>
-                                    
-                            );
-                        })
+                                    </Col>    
+                                );
+                            })
+                            }</Row>
+                    </CardDeck>
                     )
+
                     :null
                     //diversi risultati in base alla risposta
                 }
@@ -79,4 +94,17 @@ class Categories extends React.Component{
     }
 }
 
-export default Categories;
+const mapActionToProps = {
+    addCounter:()=>addCounter(),
+    decrementCounter:()=>decCounter(),
+    setCounter:(value)=>setCounter(value)
+}
+
+const mapStateToProps = state =>({
+    counter: state.counter
+})
+
+export default connect(
+    mapStateToProps,
+    mapActionToProps
+)(withRouter(Categories));

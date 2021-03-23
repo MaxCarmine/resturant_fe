@@ -1,11 +1,14 @@
 :root {
-  --nav-bg: #7ab317;
+  --nav-bg: rgb(255, 53, 53);
   --gray-light: #F8F8F8;
   --raiud: 20px
+  --nav
 }
 .App {
   text-align: center;
+  
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -36,8 +39,22 @@
     transform: rotate(360deg);
   }
 }
-.navbar {
-  background-color: var(--nav-bg);
+
+body{
+  @media screen and (min-width:768px){
+    .site-container{
+      flex-direction: row;
+      flex: 1 1 0;
+    }
+  }
+}
+
+
+.navbar{
+  background-color:rgb(229, 19, 0);
+  color: rgb(255, 255, 0);
+  width: 100%;
+  display: flex;
 }
 .main-content {
   max-width: 1344px;
@@ -45,6 +62,7 @@
   margin: 0 auto;
   position: relative;
   width: auto;
+  
 }
 .container-fluid {
   margin:auto;
@@ -86,6 +104,19 @@
     content: ' '
   }
 }
+
+
+
+.footer {
+  position:fixed,sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:rgb(245, 245, 112);
+  color:red;
+  text-align: center;
+  text-decoration: none;
+}
 /* End Loader*/
 .placeholder-loader .big {
   width: 200px;
@@ -97,4 +128,80 @@
 }
 .placeholder-loader-empty {
   color: transparent !important;
+}
+
+.navbar-light .navbar-brand{
+  color:yellow;
+}
+
+.curd-custom{
+  border-radius: 25px;
+}
+
+.btn-src{
+  color:yellow;
+  border-color: yellow;
+}
+
+.btn-src:hover{
+  background-color: rgb(245, 245, 112);
+  border-color: yellow;
+  color:red;
+}
+
+.cardbtn{
+  color:rgb(229, 19, 0);
+  background-color: rgb(246, 86, 86);
+  border-color: rgb(255, 53, 53);
+}
+.cardbtn:hover{
+  background-color: rgb(245, 245, 112);
+  border-color: yellow;
+}
+
+
+.alertbtn{
+  background-color: rgb(255, 53, 53);
+  border-color:red;
+}
+.alertbtn:hover{
+  background-color: red;
+  border-color :rgb(255, 53, 53);
+}
+
+
+.alertstyle{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.cards{
+  display: flex;
+  margin:10px ;
+}
+
+.card{
+  border:red 2px solid;
+  width: 16rem;
+  //height: 16rem;
+  margin: 5px;
+  border-radius: 25px;
+}
+
+.img{
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom: yellow 2px solid;
+}
+
+.van{
+  text-decoration: none;
+  color: yellow;
+}
+
+
+*{padding: 0;
+  margin:0;
+  box-sizing:0;
 }
