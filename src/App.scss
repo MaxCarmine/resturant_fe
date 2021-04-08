@@ -3,6 +3,7 @@
   --gray-light: #F8F8F8;
   --raiud: 20px
   --nav
+  
 }
 .App {
   text-align: center;
@@ -40,14 +41,6 @@
   }
 }
 
-body{
-  @media screen and (min-width:768px){
-    .site-container{
-      flex-direction: row;
-      flex: 1 1 0;
-    }
-  }
-}
 
 
 .navbar{
@@ -55,6 +48,9 @@ body{
   color: rgb(255, 255, 0);
   width: 100%;
   display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1030;
 }
 .main-content {
   max-width: 1344px;
@@ -62,6 +58,7 @@ body{
   margin: 0 auto;
   position: relative;
   width: auto;
+  
   
 }
 .container-fluid {
@@ -105,12 +102,16 @@ body{
   }
 }
 
-
+body{
+  min-height: 84vh;
+  position: relative;
+  margin:0;
+}
 
 .footer {
-  position:fixed,sticky;
-  left: 0;
-  bottom: 0;
+  position:absolute;
+  bottom: 0;  
+  height: 3.5rem;    
   width: 100%;
   background-color:rgb(245, 245, 112);
   color:red;
@@ -141,6 +142,8 @@ body{
 .btn-src{
   color:yellow;
   border-color: yellow;
+  background-color:rgb(255, 53, 53) ;
+
 }
 
 .btn-src:hover{
@@ -148,16 +151,21 @@ body{
   border-color: yellow;
   color:red;
 }
+.btn.src:visited{
+  background-color: rgb(255, 53, 53);
+}
 
 .cardbtn{
-  color:rgb(229, 19, 0);
+  color: rgb(245, 245, 112);
   background-color: rgb(246, 86, 86);
   border-color: rgb(255, 53, 53);
 }
 .cardbtn:hover{
   background-color: rgb(245, 245, 112);
+  color:rgb(255, 53, 53);
   border-color: yellow;
 }
+
 
 
 .alertbtn{
@@ -178,7 +186,11 @@ body{
 
 .cards{
   display: flex;
-  margin:10px ;
+  margin-top:40px ;
+}
+
+.lol{
+  padding-bottom: 2.5rem
 }
 
 .card{
@@ -198,10 +210,52 @@ body{
 .van{
   text-decoration: none;
   color: yellow;
+  
 }
-
+ .btnCart{
+   background-color: rgb(255, 53, 53);
+   color: rgb(245, 245, 112);
+   border: rgb(255, 53, 53);
+   margin:5px;
+ }
+ .btnCart:hover{
+   background-color:rgb(245, 245, 112) ;
+   color: rgb(255, 53, 53);
+   border: rgb(245, 245, 112);
+ }
+ .btnCart:after{
+  background-color: rgb(255, 53, 53);
+  color: rgb(245, 245, 112);
+  border: rgb(255, 53, 53);
+ }
 
 *{padding: 0;
   margin:0;
   box-sizing:0;
+  
+}
+
+.box{
+  margin-top: 100px;
+  overflow-x: hidden;
+  margin-bottom: 70px;
+  padding-left: 35px;
+  
+}
+
+.cardsBtns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tblStyle{
+  border:1px solid gray;
+}
+
+.burger:hover{
+  color: orangered;
+}
+
+.ordine{
+  border:1px solid rgb(246, 86, 86)
 }

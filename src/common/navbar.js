@@ -1,41 +1,52 @@
 import React from "react"
 import '../App.scss'
-import logo from './mcd.png'
+
 import {
     Navbar,
     Form,
     FormControl,
     Button, 
-    Nav
-
 } from "react-bootstrap";
 import{connect} from "react-redux"
+import { withRouter } from "react-router";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart,faHamburger,faArrowAltCircleRight,faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
+ 
+
+
+    
+
 
 const NavBar  = (props)=>{
     return(
         <Navbar className="navbar"  expand="lg">
             <Navbar.Brand >
-                <img src={logo} height="70px" width="140px" alt=""/>
+               <FontAwesomeIcon icon={faHamburger} size="3x" className="burger"/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Nav.Link className="van" href="">Home</Nav.Link>
-            <Nav.Link className="van" href="">Panini</Nav.Link>
+            <Button className="btnCart" onClick={()=>props.history.goBack()}><FontAwesomeIcon icon={faArrowAltCircleLeft}/></Button>
+            <Button className="van" className="btn-src" onClick={()=>{props.history.push("/categories")}}>Home</Button>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button className="btn-src"variant="outline-success" >Search</Button>
-                </Form>
+            
+            <Button className="btnCart" onClick={()=>props.history.goForward()}><FontAwesomeIcon icon={faArrowAltCircleRight}/></Button>
             </Navbar.Collapse>
-            <Nav.Link className="van" href="">Numero elementi Carrello: {props.numberCart}</Nav.Link>
+            
+            <Button className="btnCart" onClick={()=>{props.history.push("/ordini")}}>Order</Button>
+            <Button className="btnCart" onClick={()=>{props.history.push("/cart")}}>
+                Cart: {props.numberCart}<FontAwesomeIcon icon={faShoppingCart}/></Button>
+                
         </Navbar>
     );
 }
 
+
+
 const mapStateToProps = state =>({
     counter: state.counter,
-    numberCart: state.basket.length
+    numberCart: state.basket && state.basket.length? state.basket.reduce((somma,corrente)=>somma+corrente.qnt,0):0
+    
 })
 export default connect(
     mapStateToProps,
     null
-)(NavBar);
+)(withRouter(NavBar));

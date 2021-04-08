@@ -4,6 +4,7 @@ import{
     Button
 } from "react-bootstrap";
 
+
 const Alert = (props) =>{
     return(
         <AlertBootstrap variant={'danger'} className="alertstyle">
@@ -11,8 +12,8 @@ const Alert = (props) =>{
                 Error 500, Try Againg
             </div>
             <div>
-                {props.retryCallBack!==undefined?(
-                <Button className="alertbtn" onClick={props.retryCallBack}>Riprova</Button>
+                {props.retryCallback!==undefined?(
+                <Button className="alertbtn" onClick={props.retryCallback}>Riprova</Button>
                 ):null
                 }
             </div>

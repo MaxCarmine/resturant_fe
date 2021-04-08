@@ -17,6 +17,21 @@ export const fetchEveryItem = () => {
     return fetchWrapper("https://apirestaurant.mvlabs.it/api/products", "GET");
   };
 
+
+export const fetchItemDeteils=(id)=>{
+    return fetchWrapper(`https://apirestaurant.mvlabs.it/api/products/${id}`,`GET`);
+}
+
+
+export const fetchOrdini=()=>{//ricevo una lista di ordini
+    return fetchWrapper("https://apirestaurant.mvlabs.it/api/orders","GET");
+}
+
+export const postOrdini=(body)=>{//creo un ordine da inviare 
+    return fetchWrapper("https://apirestaurant.mvlabs.it/api/orders","POST",body);
+}
+
+
 /**
  * 
  * @param {*} url l end point della risorsa, contanto l api   

@@ -1,97 +1,57 @@
 import  Alert  from "../common/cards/alert";
 import CardProduct from "../common/cards/cardProduct"
-import React from "react";
 import { withRouter } from "react-router-dom";
 import CardLoadingSection from "../common/cards/cardLoadingSection";
 import { fetchCategory } from "../functions/api";
 import {Row, Col} from "react-bootstrap";
 import { connect } from "react-redux";
 import {addProduct,remProduct} from "../redux/actions"
+import {FetchData} from "../hooks/fetchDataHooks"
 
-class Category extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            loading: false,
-            data:null,
-            error:false
-        }
-        this.fetchData=this.fetchData.bind(this)
-    }
 
-    componentDidMount(){
-        this.fetchData()
-    }
+const Category =(props)=>{
+    const {loading, error, data,retryFetch}=FetchData(()=>fetchCategory(props.match.params.id))
+    return(
+        <div className="box">
+            {   loading ?(<CardLoadingSection/>)
+                :error ?(<Alert retryCallback={()=>retryFetch()}/>)
+                :data ?(
+                    <Row>
+                        {
+                        data.products.map((current,idx)=>{
+                        const quantity = props.basket.find(x=>x.product.id===current.id)
+                        return(
+                            <Col lg={3} xs={3} key={`${idx}`}>
+                                <CardProduct
+                                urlImages={current.images[0].uri}
+                                title={current.title}
+                                subTitle={current.subtitle}
+                                description={current.description}
+                                price={current.price}
+                                qnt={(quantity!==undefined)? quantity.qnt:0}
+                                addProduct={()=>{props.addProduct(1,current)}}
+                                remProduct={()=>{props.removeProduct(1,current.id)}}
+                                id={current.id}
+                                key={`${idx}_cardIndex`}
+                                /> 
+                            </Col>    
+                            );
+                        })
+                        }
+                    </Row>
+                )
+                :null
+            }
+        </div>
+    );
 
-    fetchData(){
-        this.setState({loading:true, error:false})
-        fetchCategory(this.props.match.params.id)
-        .then(response=>{
-            this.setState({
-                data:response
-            })
-        })
-        .catch(error =>{
-            this.setState({
-                error:true
-            })
-            
-        })
-        .finally(()=>{
-            this.setState({
-                loading:false
-            })
-        })
-    }
 
-    render(){
-        console.warn(this.state.data)
-        return(
-            <div>
-                {
-                    this.state.loading ?(
-                        <CardLoadingSection></CardLoadingSection>
-                    )
-                    :this.state.error ?(
-                        <Alert
-                        retryCallBack={()=>this.fetchData()}/>
-                    )
-                    :this.state.data ?(
-                        <Row>{
-                            this.state.data.products.map((current,idx)=>{
-                                return(
-                                    <Col lg={3}>
-                                        <CardProduct
-                                        urlImages={current.images[0].uri}
-                                        title={current.title}
-                                        subTitle={current.subtitle}
-                                        description={current.description}
-                                        buttonText={this.props.basket.find(x=>x.id===current.id)?"Remove From Cart":"Add To Cart"}
-                                        callback={()=>{
-                                            if(this.props.basket.find(x=>x.id===current.id)){
-                                                this.props.removeProduct(current.id)
-                                            }else{
-                                                this.props.addProduct(current);
-                                            }   
-                                        }}
-                                        key={`${idx}_cardIndex`}
-                                        /> 
-                                    </Col>    
-                                );
-                            })
-                            }
-                        </Row>
-                    )
-                    :null
-                }
-            </div>
-        );
-    }
 }
 
 const mapActionToProps={
-    addProduct: product=>addProduct(product),
-    removeProduct: product=>remProduct(product)
+    addProduct: (qnt,product)=>addProduct(qnt,product),
+    removeProduct:(qnt, id)=>remProduct(qnt,id)
+
 }
 const mapStateToProps=state=>({
     basket: state.basket

@@ -5,4 +5,7 @@ export const DECREMNET_COUNTER = "DECREMENT_COUNTER";
 export const SET_COUNTER= 'SET_COUNTER'
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
+
 export const REMOVE_PRODUCT="REMOVE_PRODUCT";
+
+export const REMOVE_ALL="REMOVE_ALL";

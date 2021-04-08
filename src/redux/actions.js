@@ -1,4 +1,4 @@
-import { DECREMNET_COUNTER, INCREMENT_COUNTER,ADD_PRODUCT,REMOVE_PRODUCT,SET_COUNTER } from "./actionType";
+import { DECREMNET_COUNTER, INCREMENT_COUNTER,ADD_PRODUCT,REMOVE_PRODUCT,SET_COUNTER,REMOVE_ALL } from "./actionType";
 
 export const addCounter =()=>({
     type: INCREMENT_COUNTER
@@ -13,13 +13,16 @@ export const setCounter = (value)=> ({
 })
 
 
-export const addProduct =(product)=>({
+export const addProduct =(qnt,product)=>({
     type: ADD_PRODUCT,
-    payload: product
+    payload: {qnt,product}
 })
 
-export const remProduct =(id)=>({
+export const remProduct =(qnt,id)=>({
     type: REMOVE_PRODUCT,
-    payload: id
+    payload: {qnt,id}
 })
 
+export const removeAll=()=>({
+    type:REMOVE_ALL
+})

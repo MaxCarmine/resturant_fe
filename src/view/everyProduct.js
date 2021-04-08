@@ -45,7 +45,7 @@ class EveryItem extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="box">
         {this.state.isLoading ? (
           <>
             <CardLoadingSection />
@@ -75,9 +75,11 @@ class EveryItem extends React.Component {
             </Row>
           </>
         ) : null}
-      </>
+      </div>
     );
   }
 }
+
+
 
 export default EveryItem;

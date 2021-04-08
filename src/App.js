@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import Categories from './view/categories';
 import Category from "./view/category";
+import Carello from "./view/carelloProd"
 
 import {
   HashRouter,
@@ -16,6 +17,8 @@ import { Provider } from 'react-redux';
 import { store,persistor } from './redux/store';
 import {PersistGate} from "redux-persist/integration/react"
 import EveryItem from "./view/everyProduct"
+import Deteils from "./view/productDeteils"
+import Ordini from "./view/ordini"
 
 function App() {
   return (
@@ -23,10 +26,8 @@ function App() {
       <PersistGate persistor={persistor}>
         <HashRouter> 
           <Switch>
-            <Route exact path= "/">
-              <Wrapper>
+            <Route exact path= "/login">
               <Login/>
-              </Wrapper>
             </Route>
             <Route exact path="/categories">
               <AuthWrapper key="categories">
@@ -48,6 +49,27 @@ function App() {
                 <EveryItem/>
               </Wrapper>
               </AuthWrapper>       
+            </Route>
+            <Route exact path ='/cart'> 
+              <AuthWrapper key={'cart'}>
+                <Wrapper>
+                  <Carello/>
+                </Wrapper>
+              </AuthWrapper>
+            </Route>
+            <Route exact path='/ordini'>
+              <AuthWrapper key={'ordini'}>
+                <Wrapper>
+                  <Ordini/>
+                </Wrapper>
+              </AuthWrapper>
+            </Route>
+            <Route excat path = '/deteils/:id'>
+              <AuthWrapper key={'deteils'}>
+                  <Wrapper>
+                    <Deteils/>
+                  </Wrapper>
+              </AuthWrapper>
             </Route>
             </Switch>
           </HashRouter>
