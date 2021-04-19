@@ -3,8 +3,7 @@ import '../App.scss'
 
 import {
     Navbar,
-    Form,
-    FormControl,
+    
     Button, 
 } from "react-bootstrap";
 import{connect} from "react-redux"

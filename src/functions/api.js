@@ -28,7 +28,7 @@ export const fetchOrdini=()=>{//ricevo una lista di ordini
 }
 
 export const postOrdini=(body)=>{//creo un ordine da inviare 
-    return fetchWrapper("https://apirestaurant.mvlabs.it/api/orders","POST",body);
+    return fetchWrapper("https://apirestaurant.mvlabs.it/api/orders",`POST`,body);
 }
 
 
